@@ -17,7 +17,7 @@ const HomePage = ({ setAuthenticated }) => {
       navigate("/products");
     }
   }, [setAuthenticated, navigate]);
-console.log(process.env.Api_link);
+
 
   const handleSubmit = (e) => {
     e.preventDefault();
