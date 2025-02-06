@@ -10,26 +10,26 @@ const HomePage = ({ setAuthenticated }) => {
   const navigate = useNavigate();
 
   useEffect(() => {
-    // Check if MPIN is already stored
-    const storedMpin = localStorage.getItem("authenticated");
-    if (storedMpin === "true") {
+    if (localStorage.getItem("authenticated") === "true") {
       setAuthenticated(true);
-      navigate("/products");
     }
-  }, [setAuthenticated, navigate]);
+  }, [setAuthenticated]);
 
+  if (localStorage.getItem("authenticated") === "true") {
+    return <Navigate to="/products" replace />;
+  }
 
   const handleSubmit = (e) => {
     e.preventDefault();
     if (mpin !== "1990") {
       setError("Invalid MPIN. Please try again.");
     } else {
-      setError("");
       setAuthenticated(true);
-      localStorage.setItem("authenticated", "true"); // Save authentication in localStorage
+      localStorage.setItem("authenticated", "true");
       navigate("/products");
     }
   };
+
 
   return (
     <div className="flex justify-center items-center h-screen bg-gray-100">
