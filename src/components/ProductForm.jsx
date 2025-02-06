@@ -62,7 +62,7 @@ const ProductForm = ({ refreshProducts }) => {
     <div className="flex flex-col items-center ">
       <button
         onClick={() => setIsOpen(true)}
-        className="fixed bottom-4 left-1/2 transform -translate-x-1/2 flex items-center space-x-2 bg-blue-600 text-white px-4 py-2 rounded-md hover:bg-blue-700 shadow-md z-10"
+        className="fixed bottom-4 left-1/2 transform -translate-x-1/2 flex items-center space-x-2 bg-blue-600 text-white px-4 py-2 rounded-md hover:bg-blue-700 shadow-md z-30"
       >
         <FaPlus /> <span>Add Product</span>
       </button>
