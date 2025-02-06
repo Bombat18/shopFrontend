@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import { AiFillEdit } from "react-icons/ai";
 import { MdDelete } from "react-icons/md";
+import bgimage from "../assets/bg.jpg"
 
 const ProductList = () => {
   const API_BASE_URL = import.meta.env.VITE_API_BASE_URL;
@@ -95,7 +96,7 @@ const ProductList = () => {
   const filteredProducts = products.filter(product => product.name.toLowerCase().includes(searchQuery.toLowerCase()));
 
   return (
-    <div className='min-h-screen bg-cover bg-center bg-no-repeat' style={{ backgroundImage: "url('/src/assets/bg.jpg')", backgroundAttachment: 'fixed' }}>
+    <div className='min-h-screen bg-cover bg-center bg-no-repeat' style={{ backgroundImage: `url(${bgimage})`, backgroundAttachment: 'fixed' }}>
       <div className="inset-0 bg-black opacity-30 fixed w-full h-full"></div>
       <div className="max-w-6xl mx-auto p-6 relative z-10">
         <div className="bg-white/80 rounded-lg shadow-lg p-6">
