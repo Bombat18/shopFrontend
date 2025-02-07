@@ -58,14 +58,26 @@ const ProductForm = ({ refreshProducts }) => {
     }
   };
 
+  const handleRefresh = () => {
+    window.location.reload();
+  };
+
   return (
     <div className="flex flex-col items-center ">
-      <button
-        onClick={() => setIsOpen(true)}
-        className="fixed bottom-4 left-1/2 transform -translate-x-1/2 flex items-center space-x-2 bg-blue-600 text-white px-4 py-2 rounded-md hover:bg-blue-700 shadow-md z-30"
-      >
-        <FaPlus /> <span>Add Product</span>
-      </button>
+      <div className="fixed bottom-4 left-1/2 transform -translate-x-1/2 flex space-x-4 z-30">
+        <button
+          onClick={() => setIsOpen(true)}
+          className="flex items-center space-x-2 bg-blue-600 text-white px-4 py-2 rounded-md hover:bg-blue-700 shadow-md"
+        >
+          <FaPlus /> <span>Add</span>
+        </button>
+        <button
+          onClick={handleRefresh}
+          className="bg-green-600 text-white px-4 py-2 rounded-md hover:bg-green-700 shadow-md"
+        >
+          Refresh
+        </button>
+      </div>
 
       {isOpen && (
         <div className="fixed inset-0 flex items-center justify-center bg-gray-800 bg-opacity-50 z-50 p-5">
@@ -81,7 +93,7 @@ const ProductForm = ({ refreshProducts }) => {
               {[{ label: "Product Name", name: "name", type: "text", placeholder: "Enter product name" },
                 { label: "Quantity", name: "quantity", type: "number", placeholder: "Enter quantity", min: 1 },
                 { label: "Cost Price", name: "costprice", type: "number", placeholder: "Enter cost price", min: 0 },
-                { label: "Shop Name", name: "shopname", type: "text", placeholder: "Enter shop name" }, // Added Shop Name
+                { label: "Shop Name", name: "shopname", type: "text", placeholder: "Enter shop name" },
               ].map(({ label, name, type, placeholder, min }) => (
                 <div key={name}>
                   <label htmlFor={name} className="block text-lg font-medium text-gray-700">
@@ -145,7 +157,6 @@ const ProductForm = ({ refreshProducts }) => {
           </div>
         </div>
       )}
-
     </div>
   );
 };

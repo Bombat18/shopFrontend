@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { BrowserRouter as Router, Routes, Route, useNavigate, Navigate } from "react-router-dom";
 import ProductForm from "./components/ProductForm";
 import ProductList from "./components/ProductList";
+import axios from "axios";
 
 // HomePage (MPIN Login Page)
 const HomePage = ({ setAuthenticated }) => {
@@ -29,7 +30,6 @@ const HomePage = ({ setAuthenticated }) => {
       navigate("/products");
     }
   };
-
 
   return (
     <div className="flex justify-center items-center h-screen bg-gray-100">
@@ -77,12 +77,28 @@ const App = () => {
   const [authenticated, setAuthenticated] = useState(
     localStorage.getItem("authenticated") === "true"
   );
+  const [products, setProducts] = useState([]);
   const [refresh, setRefresh] = useState(false);
+  const API_BASE_URL = import.meta.env.VITE_API_BASE_URL;
+
+  // Fetch products
+  const fetchProducts = async () => {
+    try {
+      const response = await axios.get(`${API_BASE_URL}/api/products`);
+      setProducts(response.data);
+    } catch (err) {
+      console.error("Error fetching products:", err);
+    }
+  };
 
   // Function to trigger a re-fetch of products
   const refreshProducts = () => {
     setRefresh((prev) => !prev);
   };
+
+  useEffect(() => {
+    fetchProducts();
+  }, [refresh]);
 
   return (
     <Router>
@@ -96,8 +112,15 @@ const App = () => {
           element={
             <ProtectedRoute authenticated={authenticated}>
               <div>
-                <ProductForm refreshProducts={refreshProducts} />
-                <ProductList refresh={refresh} refreshProducts={refreshProducts} />
+                <ProductForm
+                  refreshProducts={fetchProducts}
+                  setProducts={setProducts} refresh={refresh}
+                />
+                <ProductList
+                  refresh={refresh}
+                  refreshProducts={refreshProducts}
+                  products={products}
+                />
               </div>
             </ProtectedRoute>
           }

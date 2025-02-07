@@ -3,10 +3,12 @@ import axios from 'axios';
 import { AiFillEdit } from "react-icons/ai";
 import { MdDelete } from "react-icons/md";
 import bgimage from "../assets/bg.jpg"
+import { Oval } from 'react-loader-spinner';
 
 const ProductList = () => {
   const API_BASE_URL = import.meta.env.VITE_API_BASE_URL;
   const [products, setProducts] = useState([]);
+  const [loading, setLoading] = useState(true);
   const [editingProduct, setEditingProduct] = useState(null);
   const [formData, setFormData] = useState({ name: '', costprice: '', sellprice: '', quantity: '', unit: '' });
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -16,6 +18,7 @@ const ProductList = () => {
 
  const fetchProducts = async () => {
   try {
+    setLoading(true);
     const response = await axios.get(`${API_BASE_URL}/api/products`);
     setProducts(response.data.map(product => ({
       ...product,
@@ -25,6 +28,9 @@ const ProductList = () => {
     })));
   } catch (err) {
     console.error("Error fetching products:", err);
+  }
+  finally {
+    setLoading(false);
   }
 };
 
@@ -97,6 +103,7 @@ const ProductList = () => {
 
   return (
     <div className='min-h-screen bg-cover bg-center bg-no-repeat' style={{ backgroundImage: `url(${bgimage})`, backgroundAttachment: 'fixed' }}>
+    
       <div className="inset-0 bg-black opacity-30 fixed w-full h-full"></div>
       <div className="max-w-6xl mx-auto p-6 relative z-10">
         <div className="bg-white/80 rounded-lg shadow-lg p-6">
@@ -108,6 +115,12 @@ const ProductList = () => {
             className="mb-4 w-full p-2 border border-gray-300 rounded"
             placeholder="Search by product name"
           />
+ {loading ? (
+            <div className="flex justify-center items-center py-10">
+              <Oval color="#ff4500" height={50} width={50} />
+            </div>
+          ) : (
+
           <table className="w-full border-collapse border border-gray-300 text-sm md:text-base">
             <thead>
               <tr className="bg-gray-200">
@@ -130,6 +143,7 @@ const ProductList = () => {
               ))}
             </tbody>
           </table>
+          )}
         </div>
       </div>
       {isModalOpen && selectedProduct && (
@@ -168,6 +182,7 @@ const ProductList = () => {
             <button onClick={handleUpdate} className="bg-green-500 text-white px-4 py-2 rounded-md hover:bg-green-600">Save</button>
             <button onClick={closeModal} className="ml-2 bg-gray-500 text-white px-4 py-2 rounded-md hover:bg-gray-600">Cancel</button>
           </div>
+         
         </div>
       )}
     </div>
