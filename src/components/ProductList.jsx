@@ -104,15 +104,15 @@ const ProductList = () => {
   return (
     <div className='min-h-screen bg-cover bg-center bg-no-repeat' style={{ backgroundImage: `url(${bgimage})`, backgroundAttachment: 'fixed' }}>
     
-      <div className="inset-0 bg-black opacity-30 fixed w-full h-full"></div>
-      <div className="max-w-6xl mx-auto p-6 relative z-10">
-        <div className="bg-white/80 rounded-lg shadow-lg p-6">
-          <h2 className="text-3xl font-bold mb-6 text-center text-orange-500">Product List</h2>
+      <div className="inset-0 bg-black  opacity-30 fixed w-full h-full"></div>
+      <div className="max-w-6xl mx-auto p-3 relative z-10">
+        <div className=" rounded-lg shadow-lg p-3">
+          <h2 className="text-3xl font-bold mb-6 text-center text-yellow-300       ">Product List</h2>
           <input
             type="text"
             value={searchQuery}
             onChange={(e) => setSearchQuery(e.target.value)}
-            className="mb-4 w-full p-2 border border-gray-300 rounded"
+            className="mb-4 w-full p-2 border border-gray-300  rounded "
             placeholder="Search by product name"
           />
  {loading ? (
@@ -121,9 +121,9 @@ const ProductList = () => {
             </div>
           ) : (
 
-          <table className="w-full border-collapse border border-gray-300 text-sm md:text-base">
+          <table className="w-full border-collapse border border-gray-300 text-[13px] md:text-base">
             <thead>
-              <tr className="bg-gray-200">
+              <tr className="bg-gray-200 ">
                 <th className="border border-gray-300 p-2">Product</th>
                 <th className="border border-gray-300 p-2">Quantity</th>
                 <th className="border border-gray-300 p-2">Cost Price</th>
@@ -132,7 +132,7 @@ const ProductList = () => {
             </thead>
             <tbody>
               {filteredProducts.map(product => (
-                <tr key={product._id} className="text-center bg-gray-50 cursor-pointer" onClick={() => handleRowClick(product)}>
+                <tr key={product._id} className="text-center bg-gray-50  cursor-pointer" onClick={() => handleRowClick(product)}>
                   <td className="border border-gray-300 p-2"> {product.name}  <br /><span className='text-red-600'>( {product.shopname})
                   </span> </td>
 
@@ -148,7 +148,7 @@ const ProductList = () => {
       </div>
       {isModalOpen && selectedProduct && (
         <div className="fixed inset-0 flex items-center justify-center bg-gray-900 bg-opacity-50 z-30">
-          <div className="bg-white p-6 rounded-lg shadow-md w-96">
+          <div className="bg-white rounded-lg shadow-md w-96">
             <h2 className="text-xl font-semibold mb-4 text-center">Manage Product</h2>
             <div className='flex justify-evenly'>
               <button onClick={handleEdit} className="bg-blue-500 text-white px-4 py-2 rounded-md hover:bg-blue-600">Edit</button>
@@ -161,7 +161,7 @@ const ProductList = () => {
       )}
       {isEditModalOpen && (
         <div className="fixed inset-0 flex items-center justify-center bg-gray-900 bg-opacity-50 z-50">
-          <div className="bg-white p-6 rounded-lg shadow-md w-96">
+          <div className="bg-white rounded-lg shadow-md w-96">
             <h2 className="text-xl font-semibold mb-4">Edit Product</h2>
             <label className="block text-gray-700">Product Name:</label>
             <input type="text" name="name" value={formData.name} onChange={handleInputChange} className="w-full p-2 border rounded-md mb-2" />
