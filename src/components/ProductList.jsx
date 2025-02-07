@@ -106,13 +106,13 @@ const ProductList = () => {
     
       <div className="inset-0 bg-black  opacity-30 fixed w-full h-full"></div>
       <div className="max-w-6xl mx-auto p-3 relative z-10">
-        <div className=" rounded-lg shadow-lg p-3">
+        <div className=" rounded-lg shadow-lg px-3">
           <h2 className="text-3xl font-bold mb-6 text-center text-yellow-300       ">Product List</h2>
           <input
             type="text"
             value={searchQuery}
             onChange={(e) => setSearchQuery(e.target.value)}
-            className="mb-4 w-full p-2 border border-gray-300  rounded "
+            className="mb-10 w-full py-2  px-6 border border-gray-300  rounded-xl "
             placeholder="Search by product name"
           />
  {loading ? (
@@ -121,24 +121,24 @@ const ProductList = () => {
             </div>
           ) : (
 
-          <table className="w-full border-collapse border border-gray-300 text-[13px] md:text-base">
+          <table className="w-full border-collapse border border-gray-300 text-[13px] md:text-base  ">
             <thead>
-              <tr className="bg-gray-200 ">
-                <th className="border border-gray-300 p-2">Product</th>
-                <th className="border border-gray-300 p-2">Quantity</th>
-                <th className="border border-gray-300 p-2">Cost Price</th>
-                <th className="border border-gray-300 p-2">Single Price</th>
+              <tr className="bg-gray-200  ">
+                <th className="border border-black/50 py-5 px-2">Product</th>
+                <th className="border border-black/50 py-5 px-2">Quantity</th>
+                <th className="border border-black/50 py-5 px-2">Cost Price</th>
+                <th className="border border-black/50 py-5 px-2">Single Price</th>
               </tr>
             </thead>
             <tbody>
               {filteredProducts.map(product => (
-                <tr key={product._id} className="text-center bg-gray-50  cursor-pointer" onClick={() => handleRowClick(product)}>
-                  <td className="border border-gray-300 p-2"> {product.name}  <br /><span className='text-red-600'>( {product.shopname})
+                <tr key={product._id} className="text-center bg-white/90   cursor-pointer" onClick={() => handleRowClick(product)}>
+                  <td className="border border-black/50 p-2"> {product.name}  <br /><span className='text-red-600'>( {product.shopname})
                   </span> </td>
 
-                  <td className="border border-gray-300 p-2">{product.quantity} {product.unit}</td>
-                  <td className="border border-gray-300 p-2  text-orange-500 font-semibold">₹{product.costprice}</td>
-                  <td className="border border-gray-300 p-2 text-green-600 font-semibold">₹{product.pricePerQuantity}</td>
+                  <td className="border border-black/50 p-2">{product.quantity} {product.unit}</td>
+                  <td className="border border-black/50 p-2  text-orange-500 font-semibold">₹{product.costprice}</td>
+                  <td className="border border-black/50 p-2 text-green-600 font-semibold">₹{product.pricePerQuantity}</td>
                 </tr>
               ))}
             </tbody>
