@@ -99,7 +99,10 @@ const ProductList = () => {
     setFormData({ name: '', costprice: '', sellprice: '', quantity: '', unit: '', shopname: '' });
   };
 
-  const filteredProducts = products.filter(product => product.name.toLowerCase().includes(searchQuery.toLowerCase()));
+  const filteredProducts = products
+  .filter(product => product.name.toLowerCase().includes(searchQuery.toLowerCase()))
+  .sort((a, b) => a.shopname.localeCompare(b.shopname));
+
 
   return (
     <div className='min-h-screen bg-cover bg-center bg-no-repeat' style={{ backgroundImage: `url(${bgimage})`, backgroundAttachment: 'fixed' }}>
@@ -147,8 +150,8 @@ const ProductList = () => {
         </div>
       </div>
       {isModalOpen && selectedProduct && (
-        <div className="fixed inset-0 flex items-center justify-center bg-gray-900 bg-opacity-50 z-30">
-          <div className="bg-white rounded-lg shadow-md w-96">
+        <div className="fixed inset-0 flex items-center justify-center bg-gray-900 bg-opacity-50 z-30 p-5">
+          <div className="bg-white rounded-lg shadow-md w-96 p-5">
             <h2 className="text-xl font-semibold mb-4 text-center">Manage Product</h2>
             <div className='flex justify-evenly'>
               <button onClick={handleEdit} className="bg-blue-500 text-white px-4 py-2 rounded-md hover:bg-blue-600">Edit</button>
@@ -160,8 +163,8 @@ const ProductList = () => {
         </div>
       )}
       {isEditModalOpen && (
-        <div className="fixed inset-0 flex items-center justify-center bg-gray-900 bg-opacity-50 z-50">
-          <div className="bg-white rounded-lg shadow-md w-96">
+        <div className="fixed inset-0 flex items-center justify-center bg-gray-900 bg-opacity-50 z-50 p-5">
+          <div className="bg-white rounded-lg shadow-md w-96 p-5">
             <h2 className="text-xl font-semibold mb-4">Edit Product</h2>
             <label className="block text-gray-700">Product Name:</label>
             <input type="text" name="name" value={formData.name} onChange={handleInputChange} className="w-full p-2 border rounded-md mb-2" />
