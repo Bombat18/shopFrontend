@@ -91,9 +91,7 @@ const ProductForm = ({ refreshProducts }) => {
 
             <form onSubmit={handleSubmit} className="space-y-4 z-10">
               {[{ label: "Product Name", name: "name", type: "text", placeholder: "Enter product name" },
-                { label: "Quantity", name: "quantity", type: "number", placeholder: "Enter quantity", min: 1 },
-                { label: "Cost Price", name: "costprice", type: "number", placeholder: "Enter cost price", min: 0 },
-                { label: "Shop Name", name: "shopname", type: "text", placeholder: "Enter shop name" },
+              { label: "Cost Price", name: "costprice", type: "number", placeholder: "Enter cost price", min: 0 },
               ].map(({ label, name, type, placeholder, min }) => (
                 <div key={name}>
                   <label htmlFor={name} className="block text-lg font-medium text-gray-700">
@@ -113,26 +111,64 @@ const ProductForm = ({ refreshProducts }) => {
                 </div>
               ))}
 
-              <div>
-                <label htmlFor="unit" className="block text-lg font-medium text-gray-700">
-                  Unit:
-                </label>
-                <select
-                  name="unit"
-                  id="unit"
-                  value={product.unit}
-                  onChange={handleChange}
-                  required
-                  className="w-full px-4 py-2 border rounded-md border-gray-300 focus:ring-2 focus:ring-indigo-500 focus:outline-none"
-                >
-                  {["kg", "Bag", "Pac", "Lit"].map((unit) => (
-                    <option key={unit} value={unit}>
-                      {unit}
-                    </option>
-                  ))}
-                </select>
+              {/* Quantity & Unit on the same row */}
+              <div className="flex space-x-4">
+                <div className="w-1/2">
+                  <label htmlFor="quantity" className="block text-lg font-medium text-gray-700">
+                    Quantity:
+                  </label>
+                  <input
+                    type="number"
+                    name="quantity"
+                    id="quantity"
+                    value={product.quantity}
+                    onChange={handleChange}
+                    placeholder="Enter quantity"
+                    min="1"
+                    required
+                    className="w-full px-4 py-2 border rounded-md border-gray-300 focus:ring-2 focus:ring-indigo-500 focus:outline-none"
+                  />
+                </div>
+
+                <div className="w-1/2">
+                  <label htmlFor="unit" className="block text-lg font-medium text-gray-700">
+                    Unit:
+                  </label>
+                  <select
+                    name="unit"
+                    id="unit"
+                    value={product.unit}
+                    onChange={handleChange}
+                    required
+                    className="w-full px-4 py-2 border rounded-md border-gray-300 focus:ring-2 focus:ring-indigo-500 focus:outline-none"
+                  >
+                    {["kg", "Bag", "Pac", "Lit"].map((unit) => (
+                      <option key={unit} value={unit}>
+                        {unit}
+                      </option>
+                    ))}
+                  </select>
+                </div>
               </div>
 
+              {/* Shop Name - Placed Second Last */}
+              <div>
+                <label htmlFor="shopname" className="block text-lg font-medium text-gray-700">
+                  Shop Name:
+                </label>
+                <input
+                  type="text"
+                  name="shopname"
+                  id="shopname"
+                  value={product.shopname}
+                  onChange={handleChange}
+                  placeholder="Enter shop name"
+                  required
+                  className="w-full px-4 py-2 border rounded-md border-gray-300 focus:ring-2 focus:ring-indigo-500 focus:outline-none"
+                />
+              </div>
+
+              {/* Price per Quantity - Last Input */}
               <div>
                 <label htmlFor="pricePerQuantity" className="block text-lg font-medium text-gray-700">
                   Price per Quantity:
@@ -154,6 +190,7 @@ const ProductForm = ({ refreshProducts }) => {
                 {loading ? "Adding..." : "Add Product"}
               </button>
             </form>
+
           </div>
         </div>
       )}
