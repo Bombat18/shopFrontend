@@ -31,14 +31,14 @@ const ProductList = () => {
       })));
     } catch (err) {
       console.error("Error fetching products:", err);
-    }
+    }z
   };
   
   useEffect(() => {
     fetchProducts();
     const timeout = setTimeout(() => {
       setLoading(false); // Stop loader after 30 seconds
-    }, 2500);
+    }, 3000);
   
     return () => clearTimeout(timeout); // Cleanup on unmount
   }, []);
