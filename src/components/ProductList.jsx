@@ -3,7 +3,8 @@ import axios from 'axios';
 import { AiFillEdit } from "react-icons/ai";
 import { MdDelete } from "react-icons/md";
 import bgimage from "../assets/bg.jpg"
-import Loader from "./Loader";
+import EarthLoader from "./EarthLoader";
+
 
 
 const ProductList = () => {
@@ -31,16 +32,15 @@ const ProductList = () => {
       })));
     } catch (err) {
       console.error("Error fetching products:", err);
-    }z
+    }
+    finally {
+      setLoading(false); // Ensure loading is set to false after API call completes
+    }
   };
   
   useEffect(() => {
     fetchProducts();
-    const timeout = setTimeout(() => {
-      setLoading(false); // Stop loader after 30 seconds
-    }, 3000);
-  
-    return () => clearTimeout(timeout); // Cleanup on unmount
+     // Cleanup on unmount
   }, []);
     
 
@@ -163,7 +163,7 @@ const ProductList = () => {
           {loading ? (
             <div className="flex justify-center items-center py-10 h-full">
 
-              <Loader />
+              <EarthLoader/>
             </div>
           ) : (
 
